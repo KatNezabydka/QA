@@ -1,0 +1,46 @@
+version: "2"
+
+services:
+    nginx:
+        image: nginx:stable-alpine
+        container_name: qa-nginx
+        depends_on:
+            - php
+        volumes:
+            - .:/var/www/html/
+            - ./docker/nginx-site.conf:/etc/nginx/conf.d/default.conf
+        ports:
+            - 80:80
+        networks:
+            - qa-network
+
+    postgres:
+        image: postgres:12.2-alpine
+        container_name: qa-postgres
+        env_file: .env
+        environment:
+            - POSTGRES_DB=qapoint
+            - POSTGRES_USER=qapoint
+            - POSTGRES_PASSWORD=qapoint
+        ports:
+            - 5432:5432
+        networks:
+            - qa-network
+
+    php:
+        build:
+            context: ./
+            dockerfile: Dockerfile
+        container_name: qa-php
+        depends_on:
+            - postgres
+        working_dir: /var/www/html
+        volumes:
+            - .:/var/www/html
+        expose:
+            - 9000
+        networks:
+            - qa-network
+
+networks:
+    qa-network: {}

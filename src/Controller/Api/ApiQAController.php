@@ -1,12 +1,9 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types=1);
 
 namespace App\Controller\Api;
 
 use App\DTO\Request\QACreateRequest;
 use App\Entity\QuestionAnswer;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -28,10 +25,7 @@ class ApiQAController extends AbstractController
 
     /**
      * @Route("/qa", methods="POST", name="qa_new")
-     * @ParamConverter(
-     *     "qaCreateRequest",
-     *     class=QACreateRequest::class
-     * )
+     *
      * @param QACreateRequest $qaCreateRequest
      * @return Response
      */

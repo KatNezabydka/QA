@@ -12,4 +12,13 @@ EXPOSE 9000
 
 COPY . /var/www/html
 
+RUN apk --update --no-cache add autoconf g++ make && \
+    pecl install -f xdebug && \
+    docker-php-ext-enable xdebug && \
+    apk del --purge autoconf g++ make
+
+COPY docker/xdebug.ini /usr/local/etc/php/conf.d/xdebug.ini
+
+COPY docker/99-overrides.ini /usr/local/etc/php/conf.d/99-overrides.ini
+
 CMD ["php-fpm", "--nodaemonize"]

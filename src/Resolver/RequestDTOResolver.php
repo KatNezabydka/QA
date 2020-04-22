@@ -21,7 +21,7 @@ class RequestDTOResolver implements ArgumentValueResolverInterface
     {
         try {
             $classImplements = class_implements($argument->getType());
-            return $classImplements !== false && in_array(RequestDTOInterface::class, array_values($classImplements));
+            return $classImplements !== false && in_array(RequestDTOInterface::class, array_values($classImplements), true);
         } catch (\Exception $e) {
             return false;
         }

@@ -4,6 +4,7 @@ namespace App\Controller\Api;
 
 use App\DTO\Request\QACreateRequest;
 use App\Entity\QuestionAnswer;
+use App\Enum\StatusEnum;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;

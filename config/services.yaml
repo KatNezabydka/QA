@@ -28,7 +28,8 @@ services:
     App\Resolver\RequestDTOResolver:
         arguments:
             - '@validator'
-        tags: [name: controller.request_value_resolver]
+        tags:
+            - { name: controller.request_value_resolver, priority: 50 }
 
     App\EventListener\RequestTransformerListener:
         tags:

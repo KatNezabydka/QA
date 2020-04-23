@@ -6,18 +6,16 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Validator\Constraints as Assert;
 use App\Enum\StatusEnum;
 use App\Enum\ChannelEnum;
+use Elao\Enum\Bridge\Symfony\Validator\Constraint\Enum;
 
 class QACreateRequest implements RequestDTOInterface
 {
-    /* @var string
-     *
-     * @Assert\NotBlank()
-     * @Assert\Type(type="string")
+    /**
+     * @Assert\NotBlank(message="Your title is blank")
      */
     private $title;
 
-    /* @var boolean
-     *
+    /**
      * @Assert\Type(
      *     type="boolean",
      *     message="The value {{ value }} is not a valid {{ type }}."
@@ -25,27 +23,19 @@ class QACreateRequest implements RequestDTOInterface
      **/
     private $promoted;
 
-    /* @var string
-     *
-     * @Assert\NotBlank()
-     * @Assert\Type(type="string")
-     * @ Assert\Choice({StatusEnum::DRAFT, StatusEnum::PUBLISHED},
-     *      message="The value {{ value }} is not a valid choise."
-     *     )
-     * @Assert\Choice(choices=StatusEnum::DRAFT, message="Choose a valid status.")
+    /**
+     * @Assert\NotBlank
+     * @Enum(StatusEnum::class, asValue=true)
      */
     private $status;
 
-    /* @var string
-     *
-     * @Assert\NotBlank()
-     * @Assert\Type(type="string")
-     * @Assert\Choice({"faq", "bot"})
+    /**
+     * @Assert\NotBlank
+     * @Enum(ChannelEnum::class, asValue=true)
      */
     private $channel;
 
-    /* @var string
-     *
+    /**
      * @Assert\Type(type="string")
      */
     private $content;

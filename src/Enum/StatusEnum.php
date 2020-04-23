@@ -2,26 +2,18 @@
 
 namespace App\Enum;
 
-use Elao\Enum\FlaggedEnum;
+use Elao\Enum\Enum;
 
-class StatusEnum extends FlaggedEnum
+class StatusEnum extends Enum
 {
-    private const DRAFT = 1;
-    private const PUBLISHED = 2;
+    public const DRAFT = 'draft';
+    public const PUBLISHED = 'published';
 
     public static function values(): array
     {
         return [
             self::DRAFT,
             self::PUBLISHED,
-        ];
-    }
-
-    public static function readables(): array
-    {
-        return [
-            static::DRAFT => 'draft',
-            static::PUBLISHED => 'published',
         ];
     }
 }

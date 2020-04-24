@@ -4,7 +4,7 @@ namespace App\Controller\Api;
 
 use App\DTO\Request\QACreateRequest;
 use App\Entity\QuestionAnswer;
-use App\Enum\StatusEnum;
+use App\Service\QAService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -28,10 +28,16 @@ class ApiQAController extends AbstractController
      * @Route("/qa", methods="POST", name="qa_new")
      *
      * @param QACreateRequest $qaCreateRequest
+     * @param  QAService $questionAnswerService
      * @return Response
      */
-    public function saveQAAction(QACreateRequest $qaCreateRequest): Response
+    public function saveQAAction(
+        QACreateRequest $qaCreateRequest,
+        QAService $questionAnswerService
+    ): Response
     {
-        return  $this->json(['qaCreateRequest' => $qaCreateRequest], Response::HTTP_OK);
+        $response = $questionAnswerService->save($qaCreateRequest);
+
+        return  $this->json($response, Response::HTTP_OK);
     }
 }

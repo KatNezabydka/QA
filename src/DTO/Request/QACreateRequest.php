@@ -24,16 +24,17 @@ class QACreateRequest implements RequestDTOInterface
     private $promoted;
 
     /**
-     * @Assert\NotBlank
+     * @Assert\NotBlank(message="Your field is blank")
      * @Enum(StatusEnum::class, asValue=true)
      */
     private $status;
 
     /**
-     * @Assert\NotBlank
+     * @Assert\NotBlank(message="Your field is blank")
      * @Enum(ChannelEnum::class, asValue=true)
      */
     private $channel;
+
 
     /**
      * @Assert\Type(type="string")
@@ -67,19 +68,19 @@ class QACreateRequest implements RequestDTOInterface
     }
 
     /**
-     * @return string
+     * @return StatusEnum
      */
-    public function getStatus(): string
+    public function getStatus(): StatusEnum
     {
-        return $this->status;
+        return StatusEnum::get($this->status);
     }
 
     /**
-     * @return string
+     * @return ChannelEnum
      */
-    public function getChannel(): string
+    public function getChannel(): ChannelEnum
     {
-        return $this->channel;
+        return ChannelEnum::get($this->channel);
     }
 
     /**

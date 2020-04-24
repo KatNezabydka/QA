@@ -2,9 +2,9 @@
 
 namespace App\Enum;
 
-use Elao\Enum\FlaggedEnum;
+use Elao\Enum\Enum;
 
-class ChannelEnum extends FlaggedEnum
+class ChannelEnum extends Enum
 {
     private const FAQ = 'faq';
     private const BOT = 'bot';

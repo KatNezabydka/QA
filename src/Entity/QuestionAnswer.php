@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Entity\Traits\DatesTrait;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -9,6 +10,8 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class QuestionAnswer
 {
+    use DatesTrait;
+
     /**
      * @ORM\Id
      * @ORM\GeneratedValue
@@ -27,17 +30,7 @@ class QuestionAnswer
     private $promoted;
 
     /**
-     * @ORM\Column(type="datetime")
-     */
-    private $created;
-
-    /**
-     * @ORM\Column(type="datetime")
-     */
-    private $updated;
-
-    /**
-     * @ORM\Column(type="smallint")
+     * @ORM\Column(type="status")
      */
     private $status;
 
@@ -77,39 +70,21 @@ class QuestionAnswer
         return $this;
     }
 
-    public function getCreated(): ?\DateTimeInterface
-    {
-        return $this->created;
-    }
-
-    public function setCreated(\DateTimeInterface $created): self
-    {
-        $this->created = $created;
-
-        return $this;
-    }
-
-    public function getUpdated(): ?\DateTimeInterface
-    {
-        return $this->updated;
-    }
-
-    public function setUpdated(\DateTimeInterface $updated): self
-    {
-        $this->updated = $updated;
-
-        return $this;
-    }
-
-    public function getStatus(): ?int
+    /**
+     * @return mixed
+     */
+    public function getStatus()
     {
         return $this->status;
     }
 
-    public function setStatus(int $status): self
+    /**
+     * @param mixed $status
+     * @return QuestionAnswer
+     */
+    public function setStatus($status): QuestionAnswer
     {
         $this->status = $status;
-
         return $this;
     }
 

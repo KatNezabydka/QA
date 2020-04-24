@@ -1,9 +1,12 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace App\Repository;
 
+use App\Adapter\QARequestAdapter;
+use App\DTO\Request\QACreateRequest;
 use App\Entity\QuestionAnswer;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\ORMException;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -19,6 +22,25 @@ class QuestionAnswerRepository extends ServiceEntityRepository
         parent::__construct($registry, QuestionAnswer::class);
     }
 
+    public function addQuestion(QACreateRequest $qaCreateRequest): ?QuestionAnswer
+    {
+        $em = $this->getEntityManager();
+
+        $qa = (new QuestionAnswer())
+                ->setTitle($qaCreateRequest->getTitle())
+                ->setPromoted($qaCreateRequest->getPromoted())
+                ->setStatus($qaCreateRequest->getStatus()->getValue())
+                ->setAnswers((new qaRequestAdapter)->adaptedAnswer($qaCreateRequest));
+
+        try {
+            $em->persist($qa);
+            $em->flush();
+
+            return $qa;
+        } catch (ORMException $e) {
+            throw new Exception($e);
+        }
+    }
     // /**
     //  * @return QuestionAnswer[] Returns an array of QuestionAnswer objects
     //  */

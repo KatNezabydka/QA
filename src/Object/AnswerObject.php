@@ -29,6 +29,7 @@ class AnswerObject
     public function setChannel($channel): AnswerObject
     {
         $this->channel = $channel;
+
         return $this;
     }
 
@@ -47,6 +48,7 @@ class AnswerObject
     public function setContent(string $content): AnswerObject
     {
         $this->content = $content;
+
         return $this;
     }
 }

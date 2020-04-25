@@ -7,6 +7,8 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\QuestionAnswerRepository")
+ * @ORM\Table(name="question_answer")
+ * @ORM\HasLifecycleCallbacks
  */
 class QuestionAnswer
 {
@@ -85,6 +87,7 @@ class QuestionAnswer
     public function setStatus($status): QuestionAnswer
     {
         $this->status = $status;
+
         return $this;
     }
 

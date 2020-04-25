@@ -8,6 +8,7 @@ use App\Entity\QuestionAnswer;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\ORMException;
 use Doctrine\Persistence\ManagerRegistry;
+use Exception;
 
 /**
  * @method null|QuestionAnswer find($id, $lockMode = null, $lockVersion = null)
@@ -29,8 +30,8 @@ class QuestionAnswerRepository extends ServiceEntityRepository
         $qa = (new QuestionAnswer())
                 ->setTitle($qaCreateRequest->getTitle())
                 ->setPromoted($qaCreateRequest->getPromoted())
-                ->setStatus($qaCreateRequest->getStatus()->getValue())
-                ->setAnswers((new qaRequestAdapter)->adaptedAnswer($qaCreateRequest));
+                ->setStatus($qaCreateRequest->getStatus())
+                ->setAnswers((new QARequestAdapter)->adaptedAnswer($qaCreateRequest));
 
         try {
             $em->persist($qa);

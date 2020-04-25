@@ -11,11 +11,6 @@ use Symfony\Component\HttpFoundation\Response;
 class QAService
 {
     /**
-     * @var EntityManagerInterface
-     */
-    private $entityManager;
-
-    /**
      * @var QuestionAnswerRepository
      */
     private $questionAnswerRepository;
@@ -32,11 +27,12 @@ class QAService
     /**
      * @param QACreateRequest $qaCreateRequest
      * @return Response
+     * @throws \Exception
      */
     public function save(QACreateRequest $qaCreateRequest): Response
     {
       $qa = $this->questionAnswerRepository->addQuestion($qaCreateRequest);
 
-       return Response::create($qa->getId(), Response::HTTP_CREATED);
+       return Response::create('id => ' . $qa->getId(), Response::HTTP_CREATED);
     }
 }

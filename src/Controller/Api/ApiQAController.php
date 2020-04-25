@@ -28,8 +28,9 @@ class ApiQAController extends AbstractController
      * @Route("/qa", methods="POST", name="qa_new")
      *
      * @param QACreateRequest $qaCreateRequest
-     * @param  QAService $questionAnswerService
+     * @param QAService $questionAnswerService
      * @return Response
+     * @throws \Exception
      */
     public function saveQAAction(
         QACreateRequest $qaCreateRequest,

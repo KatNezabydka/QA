@@ -2,15 +2,24 @@
 
 namespace App\Object;
 
+use JMS\Serializer\Annotation as JMS;
+
 class AnswerObject
 {
     /**
      * @var string
+     *
+     * @JMS\Type("string")
+     * @JMS\SerializedName("channel")
      */
     private $channel;
 
     /**
      * @var string
+     *
+     * @JMS\Type("string")
+     * @JMS\SerializedName("content")
+     *
      */
     private $content;
 

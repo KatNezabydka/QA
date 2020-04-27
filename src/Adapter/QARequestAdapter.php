@@ -4,27 +4,11 @@ namespace App\Adapter;
 
 use App\DTO\Request\QACreateRequest;
 use App\Object\AnswerObject;
-use Symfony\Component\Serializer\Encoder\JsonEncoder;
-use Symfony\Component\Serializer\Normalizer\ArrayDenormalizer;
-use Symfony\Component\Serializer\Normalizer\GetSetMethodNormalizer;
-use Symfony\Component\Serializer\Serializer;
+use App\Util\JMSSerializerAwareTrait;
 
 class QARequestAdapter
 {
-    /**
-     * @var Serializer
-     */
-    private $serializer;
-
-    /**
-     * QARequestAdapter constructor.
-     */
-    public function __construct()
-    {
-        $this->serializer = new Serializer(
-            [new GetSetMethodNormalizer(), new ArrayDenormalizer()],
-            [new JsonEncoder()]);
-    }
+    use JMSSerializerAwareTrait;
 
     /**
      * @param QACreateRequest $createRequest
@@ -35,6 +19,10 @@ class QARequestAdapter
         $answer = (new AnswerObject())
             ->setChannel($createRequest->getChannel()->getValue())
             ->setContent($createRequest->getContent());
+
+        $eee = $this->toArray($answer);
+
+        dd($eee);
 
         return [
             'channel' => $answer->getChannel(),

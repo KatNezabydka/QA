@@ -12,7 +12,7 @@ trait JMSSerializerAwareTrait
     /**
      * @var ArrayTransformerInterface|SerializerInterface
      */
-    protected $jmsSerializer;
+    private $jmsSerializer;
 
     /**
      * @required

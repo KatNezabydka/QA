@@ -34,3 +34,13 @@ services:
     App\EventListener\RequestTransformerListener:
         tags:
             - { name: kernel.event_listener, event: kernel.request }
+
+# Внедрение зависимости метод-сеттера
+#    App\Repository\QuestionAnswerRepository:
+#        calls:
+#            - [setSerializer, ['@jms_serializer']]
+# Внедрение зависимости с помощью свойства
+#    App\Repository\QuestionAnswerRepository:
+#        class: App\Repository\QuestionAnswerRepository
+#        properties:
+#            jmsSerializer: '@jms_serializer'

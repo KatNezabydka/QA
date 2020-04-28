@@ -11,7 +11,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 class QACreateRequest implements RequestDTOInterface
 {
     /**
-     * @Assert\NotBlank(message="Your title is blank")
+     * @Assert\NotBlank(message="Your field is blank")
      */
     private $title;
 

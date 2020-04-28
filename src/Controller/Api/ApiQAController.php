@@ -16,7 +16,9 @@ class ApiQAController extends AbstractController
 {
     /**
      * @Route("/qa/{id}", methods="GET", name="qa_get")
+     *
      * @param QuestionAnswer $questionAnswer
+     *
      * @return Response
      */
     public function getQAAction(QuestionAnswer $questionAnswer): Response
@@ -28,15 +30,16 @@ class ApiQAController extends AbstractController
      * @Route("/qa", methods="POST", name="qa_new")
      *
      * @param QACreateRequest $qaCreateRequest
-     * @param QAService $questionAnswerService
-     * @return Response
+     * @param QAService       $questionAnswerService
+     *
      * @throws \Exception
+     *
+     * @return Response
      */
     public function saveQAAction(
         QACreateRequest $qaCreateRequest,
         QAService $questionAnswerService
-    ): Response
-    {
+    ): Response {
         $response = $questionAnswerService->save($qaCreateRequest);
 
         return  $this->json($response->getContent(), Response::HTTP_OK);

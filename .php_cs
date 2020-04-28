@@ -7,22 +7,18 @@ $finder = PhpCsFixer\Finder::create()
     ->ignoreVCS(true);
 
 $rules = [
-    '@Symfony' => true,
-    '@PSR1' => true,
-    '@PSR2' => true,
-    '@PhpCsFixer' => false,
-    '@DoctrineAnnotation' => true,
-    'concat_space' => [
+     '@PhpCsFixer' => true,
+     'concat_space' => [
         'spacing' => 'one'
-    ],
-    'phpdoc_add_missing_param_annotation' => [
-        'only_untyped' => false,
-    ],
-    'blank_line_before_statement' => [
-        'statements' => ["break", "continue", "return", "throw", "try"]
-    ],
-    'blank_line_after_opening_tag' => false
-];
+     ],
+     'phpdoc_types_order' => [
+        'null_adjustment' => 'always_last'
+      ],
+     '@DoctrineAnnotation' => true,
+     'blank_line_after_opening_tag' => false,
+     'no_superfluous_phpdoc_tags' => false,
+     'multiline_whitespace_before_semicolons' => false,
+ ];
 
 return PhpCsFixer\Config::create()
     ->setRules($rules)

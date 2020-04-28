@@ -24,6 +24,7 @@ class AnswerObject
 
     /**
      * @param mixed $channel
+     *
      * @return AnswerObject
      */
     public function setChannel($channel): AnswerObject
@@ -43,6 +44,7 @@ class AnswerObject
 
     /**
      * @param string $content
+     *
      * @return AnswerObject
      */
     public function setContent(string $content): AnswerObject

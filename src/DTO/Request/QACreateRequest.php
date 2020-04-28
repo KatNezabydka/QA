@@ -2,11 +2,11 @@
 
 namespace App\DTO\Request;
 
+use App\Enum\ChannelEnum;
+use App\Enum\StatusEnum;
+use Elao\Enum\Bridge\Symfony\Validator\Constraint\Enum;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Validator\Constraints as Assert;
-use App\Enum\StatusEnum;
-use App\Enum\ChannelEnum;
-use Elao\Enum\Bridge\Symfony\Validator\Constraint\Enum;
 
 class QACreateRequest implements RequestDTOInterface
 {
@@ -20,7 +20,7 @@ class QACreateRequest implements RequestDTOInterface
      *     type="boolean",
      *     message="The value {{ value }} is not a valid {{ type }}."
      * )
-     **/
+     */
     private $promoted;
 
     /**
@@ -35,7 +35,6 @@ class QACreateRequest implements RequestDTOInterface
      */
     private $channel;
 
-
     /**
      * @Assert\Type(type="string")
      */
@@ -43,6 +42,7 @@ class QACreateRequest implements RequestDTOInterface
 
     /**
      * QACreateRequest constructor.
+     *
      * @param Request $request
      */
     public function __construct(Request $request)

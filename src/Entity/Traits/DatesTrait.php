@@ -28,6 +28,7 @@ trait DatesTrait
 
     /**
      * @param \DateTime $created
+     *
      * @return self
      */
     public function setCreated(\DateTime $created): self
@@ -47,6 +48,7 @@ trait DatesTrait
 
     /**
      * @param \DateTime $updated
+     *
      * @return self
      */
     public function setUpdated(\DateTime $updated): self
@@ -86,9 +88,9 @@ trait DatesTrait
     }
 
     /**
-     * @return int
-     *
      * @throws \Exception
+     *
+     * @return int
      */
     public function getDtUpdated(): int
     {

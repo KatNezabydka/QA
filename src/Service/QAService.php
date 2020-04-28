@@ -17,6 +17,7 @@ class QAService
 
     /**
      * QuestionAnswerService constructor.
+     *
      * @param EntityManagerInterface $entityManager
      */
     public function __construct(EntityManagerInterface $entityManager)
@@ -26,13 +27,15 @@ class QAService
 
     /**
      * @param QACreateRequest $qaCreateRequest
-     * @return Response
+     *
      * @throws \Exception
+     *
+     * @return Response
      */
     public function save(QACreateRequest $qaCreateRequest): Response
     {
-      $qa = $this->questionAnswerRepository->addQuestion($qaCreateRequest);
+        $qa = $this->questionAnswerRepository->addQuestion($qaCreateRequest);
 
-       return Response::create((string)$qa->getId(), Response::HTTP_CREATED);
+        return Response::create((string) $qa->getId(), Response::HTTP_CREATED);
     }
 }

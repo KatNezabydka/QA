@@ -11,8 +11,8 @@ use Doctrine\ORM\ORMException;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @method null|QuestionAnswer find($id, $lockMode = null, $lockVersion = null)
- * @method null|QuestionAnswer findOneBy(array $criteria, array $orderBy = null)
+ * @method QuestionAnswer|null find($id, $lockMode = null, $lockVersion = null)
+ * @method QuestionAnswer|null findOneBy(array $criteria, array $orderBy = null)
  * @method QuestionAnswer[]    findAll()
  * @method QuestionAnswer[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
@@ -30,10 +30,10 @@ class QuestionAnswerRepository extends ServiceEntityRepository
         $em = $this->getEntityManager();
 
         $qa = (new QuestionAnswer())
-                ->setTitle($qaCreateRequest->getTitle())
-                ->setPromoted($qaCreateRequest->getPromoted())
-                ->setStatus($qaCreateRequest->getStatus())
-                ->setAnswers($this->toArray((new QARequestAdapter())->adaptedAnswer($qaCreateRequest)));
+            ->setTitle($qaCreateRequest->getTitle())
+            ->setPromoted($qaCreateRequest->getPromoted())
+            ->setStatus($qaCreateRequest->getStatus())
+            ->setAnswers($this->toArray((new QARequestAdapter())->adaptedAnswer($qaCreateRequest)));
 
         try {
             $em->persist($qa);
@@ -44,6 +44,7 @@ class QuestionAnswerRepository extends ServiceEntityRepository
             throw new \RuntimeException($e);
         }
     }
+
     // /**
     //  * @return QuestionAnswer[] Returns an array of QuestionAnswer objects
     //  */

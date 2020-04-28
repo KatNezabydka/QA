@@ -82,6 +82,7 @@ class QuestionAnswer
 
     /**
      * @param mixed $status
+     *
      * @return QuestionAnswer
      */
     public function setStatus($status): QuestionAnswer

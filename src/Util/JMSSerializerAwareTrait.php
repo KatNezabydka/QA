@@ -10,7 +10,7 @@ use JMS\Serializer\SerializerInterface;
 trait JMSSerializerAwareTrait
 {
     /**
-     * @var SerializerInterface|ArrayTransformerInterface
+     * @var ArrayTransformerInterface|SerializerInterface
      */
     protected $jmsSerializer;
 
@@ -25,10 +25,11 @@ trait JMSSerializerAwareTrait
     }
 
     /**
-     * @param mixed $data
-     * @param string $format
+     * @param mixed                     $data
+     * @param string                    $format
      * @param SerializationContext|null $context
-     * @param string|null $type
+     * @param string|null               $type
+     *
      * @return string
      */
     public function serialize($data, string $format, ?SerializationContext $context = null, ?string $type = null): string
@@ -37,10 +38,11 @@ trait JMSSerializerAwareTrait
     }
 
     /**
-     * @param string $data
-     * @param string $type
-     * @param string $format
+     * @param string                      $data
+     * @param string                      $type
+     * @param string                      $format
      * @param DeserializationContext|null $context
+     *
      * @return mixed
      */
     public function deserialize(string $data, string $type, string $format, ?DeserializationContext $context = null)
@@ -49,9 +51,10 @@ trait JMSSerializerAwareTrait
     }
 
     /**
-     * @param mixed $data
+     * @param mixed                     $data
      * @param SerializationContext|null $context
-     * @param string|null $type
+     * @param string|null               $type
+     *
      * @return array
      */
     public function toArray($data, ?SerializationContext $context = null, ?string $type = null): array
@@ -60,9 +63,10 @@ trait JMSSerializerAwareTrait
     }
 
     /**
-     * @param array $data
-     * @param string $type
+     * @param array                       $data
+     * @param string                      $type
      * @param DeserializationContext|null $context
+     *
      * @return mixed
      */
     public function fromArray(array $data, string $type, ?DeserializationContext $context = null)

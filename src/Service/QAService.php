@@ -33,6 +33,6 @@ class QAService
     {
       $qa = $this->questionAnswerRepository->addQuestion($qaCreateRequest);
 
-       return Response::create('id => ' . $qa->getId(), Response::HTTP_CREATED);
+       return Response::create((string)$qa->getId(), Response::HTTP_CREATED);
     }
 }

@@ -5,10 +5,10 @@ namespace App\Repository;
 use App\Adapter\QARequestAdapter;
 use App\DTO\Request\QACreateRequest;
 use App\Entity\QuestionAnswer;
+use App\Util\JMSSerializerAwareTrait;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\ORMException;
 use Doctrine\Persistence\ManagerRegistry;
-use Exception;
 
 /**
  * @method null|QuestionAnswer find($id, $lockMode = null, $lockVersion = null)
@@ -18,6 +18,8 @@ use Exception;
  */
 class QuestionAnswerRepository extends ServiceEntityRepository
 {
+    use JMSSerializerAwareTrait;
+
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, QuestionAnswer::class);
@@ -31,7 +33,7 @@ class QuestionAnswerRepository extends ServiceEntityRepository
                 ->setTitle($qaCreateRequest->getTitle())
                 ->setPromoted($qaCreateRequest->getPromoted())
                 ->setStatus($qaCreateRequest->getStatus())
-                ->setAnswers((new QARequestAdapter)->adaptedAnswer($qaCreateRequest));
+                ->setAnswers($this->toArray((new QARequestAdapter())->adaptedAnswer($qaCreateRequest)));
 
         try {
             $em->persist($qa);
@@ -39,7 +41,7 @@ class QuestionAnswerRepository extends ServiceEntityRepository
 
             return $qa;
         } catch (ORMException $e) {
-            throw new Exception($e);
+            throw new \RuntimeException($e);
         }
     }
     // /**

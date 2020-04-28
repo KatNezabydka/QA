@@ -39,6 +39,6 @@ class ApiQAController extends AbstractController
     {
         $response = $questionAnswerService->save($qaCreateRequest);
 
-        return  $this->json($response, Response::HTTP_OK);
+        return  $this->json($response->getContent(), Response::HTTP_OK);
     }
 }

@@ -5,6 +5,8 @@ namespace App\Controller\Api;
 use App\DTO\Request\QACreateRequest;
 use App\Entity\QuestionAnswer;
 use App\Service\QAService;
+use App\Util\LoggerAwareTrait;
+use Exception;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -14,8 +16,10 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class ApiQAController extends AbstractController
 {
+    use LoggerAwareTrait;
+
     /**
-     * @Route("/qa/{id}", methods="GET", name="qa_get")
+     * @Route("/qa/{id}", methods="GET", name="qa_get", requirements={"id": "\d+"})
      *
      * @param QuestionAnswer $questionAnswer
      *
@@ -23,7 +27,7 @@ class ApiQAController extends AbstractController
      */
     public function getQAAction(QuestionAnswer $questionAnswer): Response
     {
-        return $this->json(['questionAnswer' => $questionAnswer], Response::HTTP_OK);
+        return $this->json($questionAnswer, Response::HTTP_OK);
     }
 
     /**
@@ -32,7 +36,7 @@ class ApiQAController extends AbstractController
      * @param QACreateRequest $qaCreateRequest
      * @param QAService       $questionAnswerService
      *
-     * @throws \Exception
+     * @throws Exception
      *
      * @return Response
      */

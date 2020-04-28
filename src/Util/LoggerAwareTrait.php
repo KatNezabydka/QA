@@ -25,7 +25,7 @@ trait LoggerAwareTrait
      * @param string $message
      * @param array  $context
      */
-    public function emergency($message, array $context = [])
+    public function emergency($message, array $context = []): void
     {
         $this->logger->emergency($message, $context);
     }
@@ -43,7 +43,7 @@ trait LoggerAwareTrait
      * @param string $message
      * @param array  $context
      */
-    public function critical($message, array $context = [])
+    public function critical($message, array $context = []): void
     {
         $this->logger->critical($message, $context);
     }
@@ -52,7 +52,7 @@ trait LoggerAwareTrait
      * @param string $message
      * @param array  $context
      */
-    public function error($message, array $context = [])
+    public function error($message, array $context = []): void
     {
         $this->logger->error($message, $context);
     }
@@ -61,7 +61,7 @@ trait LoggerAwareTrait
      * @param string $message
      * @param array  $context
      */
-    public function warning($message, array $context = [])
+    public function warning($message, array $context = []): void
     {
         $this->logger->warning($message, $context);
     }
@@ -70,7 +70,7 @@ trait LoggerAwareTrait
      * @param string $message
      * @param array  $context
      */
-    public function notice($message, array $context = [])
+    public function notice($message, array $context = []): void
     {
         $this->logger->notice($message, $context);
     }
@@ -79,7 +79,7 @@ trait LoggerAwareTrait
      * @param string $message
      * @param array  $context
      */
-    public function info($message, array $context = [])
+    public function info($message, array $context = []): void
     {
         $this->logger->info($message, $context);
     }
@@ -88,7 +88,7 @@ trait LoggerAwareTrait
      * @param string $message
      * @param array  $context
      */
-    public function debug($message, array $context = [])
+    public function debug($message, array $context = []): void
     {
         $this->logger->debug($message, $context);
     }
@@ -98,7 +98,7 @@ trait LoggerAwareTrait
      * @param string $message
      * @param array  $context
      */
-    public function log($level, $message, array $context = [])
+    public function log($level, $message, array $context = []): void
     {
         $this->logger->log($level, $message, $context);
     }

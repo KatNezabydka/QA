@@ -2,36 +2,38 @@
 
 namespace App\Entity\Traits;
 
+use DateTime;
+
 trait DatesTrait
 {
     /**
-     * @var \DateTime
+     * @var DateTime
      *
      * @ORM\Column(name="created", type="datetime", nullable=true)
      */
     protected $created;
 
     /**
-     * @var \DateTime
+     * @var DateTime
      *
      * @ORM\Column(name="updated", type="datetime", nullable=true)
      */
     protected $updated;
 
     /**
-     * @return \DateTime
+     * @return DateTime
      */
-    public function getCreated(): \DateTime
+    public function getCreated(): DateTime
     {
         return $this->created;
     }
 
     /**
-     * @param \DateTime $created
+     * @param DateTime $created
      *
      * @return self
      */
-    public function setCreated(\DateTime $created): self
+    public function setCreated(DateTime $created): self
     {
         $this->created = $created;
 
@@ -39,19 +41,19 @@ trait DatesTrait
     }
 
     /**
-     * @return \DateTime|null
+     * @return DateTime|null
      */
-    public function getUpdated(): ?\DateTime
+    public function getUpdated(): ?DateTime
     {
         return $this->updated;
     }
 
     /**
-     * @param \DateTime $updated
+     * @param DateTime $updated
      *
      * @return self
      */
-    public function setUpdated(\DateTime $updated): self
+    public function setUpdated(DateTime $updated): self
     {
         $this->updated = $updated;
 
@@ -65,7 +67,7 @@ trait DatesTrait
      */
     public function createDate(): void
     {
-        $this->setCreated(new \DateTime());
+        $this->setCreated(new DateTime());
     }
 
     /**
@@ -76,7 +78,7 @@ trait DatesTrait
      */
     public function updateDate(): void
     {
-        $this->setUpdated(new \DateTime());
+        $this->setUpdated(new DateTime());
     }
 
     /**

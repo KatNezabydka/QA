@@ -12,15 +12,15 @@ use Doctrine\Migrations\AbstractMigration;
  */
 final class Version20200429134121 extends AbstractMigration
 {
-    public function getDescription() : string
+    public function getDescription(): string
     {
         return '';
     }
 
-    public function up(Schema $schema) : void
+    public function up(Schema $schema): void
     {
         // this up() migration is auto-generated, please modify it to your needs
-        $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'postgresql', 'Migration can only be executed safely on \'postgresql\'.');
+        $this->abortIf('postgresql' !== $this->connection->getDatabasePlatform()->getName(), 'Migration can only be executed safely on \'postgresql\'.');
 
         $this->addSql('CREATE SEQUENCE question_historic_id_seq INCREMENT BY 1 MINVALUE 1 START 1');
         $this->addSql('CREATE TABLE question_historic (id INT NOT NULL, title VARCHAR(255) DEFAULT NULL, status VARCHAR(255) DEFAULT NULL, updated TIMESTAMP(0) WITHOUT TIME ZONE DEFAULT NULL, PRIMARY KEY(id))');
@@ -28,10 +28,10 @@ final class Version20200429134121 extends AbstractMigration
         $this->addSql('ALTER TABLE question_answer ALTER updated DROP NOT NULL');
     }
 
-    public function down(Schema $schema) : void
+    public function down(Schema $schema): void
     {
         // this down() migration is auto-generated, please modify it to your needs
-        $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'postgresql', 'Migration can only be executed safely on \'postgresql\'.');
+        $this->abortIf('postgresql' !== $this->connection->getDatabasePlatform()->getName(), 'Migration can only be executed safely on \'postgresql\'.');
 
         $this->addSql('CREATE SCHEMA public');
         $this->addSql('DROP SEQUENCE question_historic_id_seq CASCADE');

@@ -9,7 +9,6 @@ use App\Service\QAService;
 use App\Util\JMSSerializerAwareTrait;
 use App\Util\LoggerAwareTrait;
 use App\Util\ValidatorAwareTrait;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;

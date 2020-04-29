@@ -54,11 +54,13 @@ class QuestionAnswer
 
     /**
      * @param int $id
+     *
      * @return QuestionAnswer
      */
     public function setId($id): QuestionAnswer
     {
         $this->id = $id;
+
         return $this;
     }
 
@@ -72,11 +74,13 @@ class QuestionAnswer
 
     /**
      * @param mixed $title
+     *
      * @return QuestionAnswer
      */
     public function setTitle($title): QuestionAnswer
     {
         $this->title = $title;
+
         return $this;
     }
 
@@ -90,11 +94,13 @@ class QuestionAnswer
 
     /**
      * @param mixed $promoted
+     *
      * @return QuestionAnswer
      */
     public function setPromoted($promoted): QuestionAnswer
     {
         $this->promoted = $promoted;
+
         return $this;
     }
 
@@ -108,11 +114,13 @@ class QuestionAnswer
 
     /**
      * @param Enum $status
+     *
      * @return QuestionAnswer
      */
     public function setStatus($status): QuestionAnswer
     {
         $this->status = $status;
+
         return $this;
     }
 
@@ -126,11 +134,13 @@ class QuestionAnswer
 
     /**
      * @param array $answers
+     *
      * @return QuestionAnswer
      */
     public function setAnswers(array $answers): QuestionAnswer
     {
         $this->answers = $answers;
+
         return $this;
     }
 }

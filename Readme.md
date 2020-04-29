@@ -1,4 +1,4 @@
-## Smart Tribune - Backend - Coding Test :
+## Task - Backend - Coding Test :
 
 Use PHP7 & Symfony 4.4 or 5 and MariaDB or PostgreSQL database.
 Unit Tests are mandatory. 

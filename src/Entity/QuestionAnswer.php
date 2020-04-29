@@ -2,7 +2,8 @@
 
 namespace App\Entity;
 
-use App\Entity\Traits\DatesTrait;
+use App\Entity\Traits\DateCreateTrait;
+use App\Entity\Traits\DateUpdateTrait;
 use Doctrine\ORM\Mapping as ORM;
 use Elao\Enum\Enum;
 
@@ -13,7 +14,8 @@ use Elao\Enum\Enum;
  */
 class QuestionAnswer
 {
-    use DatesTrait;
+    use DateCreateTrait;
+    use DateUpdateTrait;
 
     /**
      * @ORM\Id

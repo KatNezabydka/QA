@@ -3,6 +3,7 @@
 namespace App\Controller\Api;
 
 use App\DTO\Request\CreateQARequest;
+use App\DTO\Request\UpdateQARequest;
 use App\DTO\Response\CreateQAResponse;
 use App\Entity\QuestionAnswer;
 use App\Service\QAService;
@@ -31,6 +32,24 @@ class ApiQAController extends AbstractController
      */
     public function getQAAction(QuestionAnswer $questionAnswer): Response
     {
+        return $this->json($questionAnswer, Response::HTTP_OK);
+    }
+
+    /**
+     * @Route("/qa/{id}", methods="PUT", name="qa_update", requirements={"id": "\d+"})
+     *
+     * @param QuestionAnswer  $questionAnswer
+     * @param UpdateQARequest $qaUpdateRequest
+     *
+     * @return Response
+     */
+    public function updateQAAction(
+        QuestionAnswer $questionAnswer,
+        UpdateQARequest $qaUpdateRequest
+    ): Response {
+        $errors = $this->validateAndGetErrors($qaUpdateRequest);
+        dd($errors);
+
         return $this->json($questionAnswer, Response::HTTP_OK);
     }
 

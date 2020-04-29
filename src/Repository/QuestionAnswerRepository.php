@@ -3,7 +3,7 @@
 namespace App\Repository;
 
 use App\Adapter\QARequestAdapter;
-use App\DTO\Request\QACreateRequest;
+use App\DTO\Request\CreateQARequest;
 use App\Entity\QuestionAnswer;
 use App\Util\JMSSerializerAwareTrait;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
@@ -25,7 +25,7 @@ class QuestionAnswerRepository extends ServiceEntityRepository
         parent::__construct($registry, QuestionAnswer::class);
     }
 
-    public function addQuestion(QACreateRequest $qaCreateRequest): ?QuestionAnswer
+    public function addQuestion(CreateQARequest $qaCreateRequest): QuestionAnswer
     {
         $em = $this->getEntityManager();
 

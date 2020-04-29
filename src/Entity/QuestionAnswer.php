@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Entity\Traits\DatesTrait;
 use Doctrine\ORM\Mapping as ORM;
+use Elao\Enum\Enum;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\QuestionAnswerRepository")
@@ -43,64 +44,93 @@ class QuestionAnswer
      */
     private $answers = [];
 
-    public function getId(): ?int
+    /**
+     * @return int
+     */
+    public function getId(): int
     {
         return $this->id;
     }
 
-    public function getTitle(): ?string
+    /**
+     * @param int $id
+     * @return QuestionAnswer
+     */
+    public function setId($id): QuestionAnswer
     {
-        return $this->title;
-    }
-
-    public function setTitle(string $title): self
-    {
-        $this->title = $title;
-
-        return $this;
-    }
-
-    public function getPromoted(): ?bool
-    {
-        return $this->promoted;
-    }
-
-    public function setPromoted(bool $promoted): self
-    {
-        $this->promoted = $promoted;
-
+        $this->id = $id;
         return $this;
     }
 
     /**
-     * @return mixed
+     * @return string
      */
-    public function getStatus()
+    public function getTitle(): string
+    {
+        return $this->title;
+    }
+
+    /**
+     * @param mixed $title
+     * @return QuestionAnswer
+     */
+    public function setTitle($title): QuestionAnswer
+    {
+        $this->title = $title;
+        return $this;
+    }
+
+    /**
+     * @return bool
+     */
+    public function getPromoted(): bool
+    {
+        return $this->promoted;
+    }
+
+    /**
+     * @param mixed $promoted
+     * @return QuestionAnswer
+     */
+    public function setPromoted($promoted): QuestionAnswer
+    {
+        $this->promoted = $promoted;
+        return $this;
+    }
+
+    /**
+     * @return Enum
+     */
+    public function getStatus(): Enum
     {
         return $this->status;
     }
 
     /**
-     * @param mixed $status
-     *
+     * @param Enum $status
      * @return QuestionAnswer
      */
     public function setStatus($status): QuestionAnswer
     {
         $this->status = $status;
-
         return $this;
     }
 
-    public function getAnswers(): ?array
+    /**
+     * @return array
+     */
+    public function getAnswers(): array
     {
         return $this->answers;
     }
 
-    public function setAnswers(?array $answers): self
+    /**
+     * @param array $answers
+     * @return QuestionAnswer
+     */
+    public function setAnswers(array $answers): QuestionAnswer
     {
         $this->answers = $answers;
-
         return $this;
     }
 }

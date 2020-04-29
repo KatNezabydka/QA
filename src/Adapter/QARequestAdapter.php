@@ -2,17 +2,17 @@
 
 namespace App\Adapter;
 
-use App\DTO\Request\QACreateRequest;
+use App\DTO\Request\CreateQARequest;
 use App\Object\AnswerObject;
 
 class QARequestAdapter
 {
     /**
-     * @param QACreateRequest $createRequest
+     * @param CreateQARequest $createRequest
      *
      * @return AnswerObject
      */
-    public function adaptedAnswer(QACreateRequest $createRequest): AnswerObject
+    public function adaptedAnswer(CreateQARequest $createRequest): AnswerObject
     {
         return (new AnswerObject())
             ->setChannel($createRequest->getChannel()->getValue())

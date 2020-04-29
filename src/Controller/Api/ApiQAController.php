@@ -2,11 +2,14 @@
 
 namespace App\Controller\Api;
 
-use App\DTO\Request\QACreateRequest;
+use App\DTO\Request\CreateQARequest;
+use App\DTO\Response\CreateQAResponse;
 use App\Entity\QuestionAnswer;
 use App\Service\QAService;
+use App\Util\JMSSerializerAwareTrait;
 use App\Util\LoggerAwareTrait;
-use Exception;
+use App\Util\ValidatorAwareTrait;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -16,6 +19,8 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class ApiQAController extends AbstractController
 {
+    use JMSSerializerAwareTrait;
+    use ValidatorAwareTrait;
     use LoggerAwareTrait;
 
     /**
@@ -33,19 +38,30 @@ class ApiQAController extends AbstractController
     /**
      * @Route("/qa", methods="POST", name="qa_new")
      *
-     * @param QACreateRequest $qaCreateRequest
+     * @param CreateQARequest $qaCreateRequest
      * @param QAService       $questionAnswerService
-     *
-     * @throws Exception
      *
      * @return Response
      */
     public function saveQAAction(
-        QACreateRequest $qaCreateRequest,
+        CreateQARequest $qaCreateRequest,
         QAService $questionAnswerService
     ): Response {
+        $errors = $this->validateAndGetErrors($qaCreateRequest);
+        if (!empty($errors)) {
+            $this->info('Create QA', [
+                'response' => $errors,
+            ]);
+
+            $response = (new CreateQAResponse())
+                ->setErrorMessage($errors)
+                ->setStatusCode(Response::HTTP_BAD_REQUEST);
+
+            return $this->json($this->toArray($response), $response->getStatusCode());
+        }
+
         $response = $questionAnswerService->save($qaCreateRequest);
 
-        return  $this->json($response->getContent(), Response::HTTP_OK);
+        return $this->json($this->toArray($response), $response->getStatusCode());
     }
 }

@@ -34,7 +34,7 @@ trait LoggerAwareTrait
      * @param string $message
      * @param array  $context
      */
-    public function alert($message, array $context = [])
+    public function alert($message, array $context = []): void
     {
         $this->logger->alert($message, $context);
     }

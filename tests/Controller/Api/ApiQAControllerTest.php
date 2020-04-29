@@ -43,11 +43,7 @@ class ApiQAControllerTest extends WebTestCase
 
         $client->request(
             'POST',
-            'api/qa',
-            [],
-            [],
-            ['CONTENT_TYPE' => 'application/json'],
-            ''
+            'api/qa'
         );
         static::assertStringContainsString('Your field is blank', $client->getResponse()->getContent());
         static::assertEquals(400, $client->getResponse()->getStatusCode());
@@ -78,7 +74,7 @@ class ApiQAControllerTest extends WebTestCase
     public function provideUrls(): array
     {
         return [
-            ['/api/qa/1'],
+            ['/api/qa/5'],
         ];
     }
 }

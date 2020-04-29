@@ -5,6 +5,7 @@
         "php": "^7.2.5",
         "ext-ctype": "*",
         "ext-iconv": "*",
+        "ext-http": "*",
         "boldtrn/jsonb-bundle": "^1.1",
         "elao/enum": "^1.8",
         "jms/serializer-bundle": "^3.5",

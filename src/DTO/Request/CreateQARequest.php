@@ -8,7 +8,7 @@ use Elao\Enum\Bridge\Symfony\Validator\Constraint\Enum;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Validator\Constraints as Assert;
 
-class QACreateRequest implements RequestDTOInterface
+class CreateQARequest implements RequestDTOInterface
 {
     /**
      * @Assert\NotBlank(message="Your field is blank")
@@ -48,7 +48,7 @@ class QACreateRequest implements RequestDTOInterface
     public function __construct(Request $request)
     {
         $this->title = $request->get('title');
-        $this->promoted = $request->get('promoted');
+        $this->promoted = $request->get('promoted') ?? false;
         $this->status = $request->get('status');
         $this->channel = $request->get('channel');
         $this->content = $request->get('content');

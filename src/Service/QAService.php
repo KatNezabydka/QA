@@ -2,13 +2,14 @@
 
 namespace App\Service;
 
-use App\DTO\Request\QACreateRequest;
+use App\DTO\Request\CreateQARequest;
+use App\DTO\Response\CreateQAResponse;
 use App\Entity\QuestionAnswer;
 use App\Repository\QuestionAnswerRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Response;
 
-class QAService
+class QAService implements QAServiceInterface
 {
     /**
      * @var QuestionAnswerRepository
@@ -16,7 +17,7 @@ class QAService
     private $questionAnswerRepository;
 
     /**
-     * QuestionAnswerService constructor.
+     * QAService constructor.
      *
      * @param EntityManagerInterface $entityManager
      */
@@ -26,16 +27,16 @@ class QAService
     }
 
     /**
-     * @param QACreateRequest $qaCreateRequest
+     * @param CreateQARequest $qaCreateRequest
      *
-     * @throws \Exception
-     *
-     * @return Response
+     * @return CreateQAResponse
      */
-    public function save(QACreateRequest $qaCreateRequest): Response
+    public function save(CreateQARequest $qaCreateRequest): CreateQAResponse
     {
         $qa = $this->questionAnswerRepository->addQuestion($qaCreateRequest);
 
-        return Response::create((string) $qa->getId(), Response::HTTP_CREATED);
+        return (new CreateQAResponse())
+            ->setQuestionId($qa->getId())
+            ->setStatusCode(Response::HTTP_CREATED);
     }
 }

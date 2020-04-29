@@ -44,3 +44,10 @@ services:
 #        class: App\Repository\QuestionAnswerRepository
 #        properties:
 #            jmsSerializer: '@jms_serializer'
+
+# Кастомный парам ковертор, сейчас он подключается автоматически, потому как все сервисы публичны
+#    app.request.param_converter.qa_request:
+#        class: App\ParamConverter\QARequestParamConverter
+#        autowire: true
+#        tags:
+#            - { name: request.param_converter, priority: -2, converter: app.request.param_converter.qa_request }

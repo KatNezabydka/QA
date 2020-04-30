@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Adapter\QARequestAdapter;
 use App\DTO\Request\CreateQARequest;
+use App\DTO\Request\UpdateQARequest;
 use App\Entity\QuestionAnswer;
 use App\Util\JMSSerializerAwareTrait;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
@@ -25,7 +26,7 @@ class QuestionAnswerRepository extends ServiceEntityRepository
         parent::__construct($registry, QuestionAnswer::class);
     }
 
-    public function addQuestion(CreateQARequest $qaCreateRequest): QuestionAnswer
+    public function save(CreateQARequest $qaCreateRequest): QuestionAnswer
     {
         $em = $this->getEntityManager();
 
@@ -34,6 +35,30 @@ class QuestionAnswerRepository extends ServiceEntityRepository
             ->setPromoted($qaCreateRequest->getPromoted())
             ->setStatus($qaCreateRequest->getStatus())
             ->setAnswers($this->toArray((new QARequestAdapter())->adaptedAnswer($qaCreateRequest)));
+
+        try {
+            $em->persist($qa);
+            $em->flush();
+
+            return $qa;
+        } catch (ORMException $e) {
+            throw new \RuntimeException($e);
+        }
+    }
+
+    /**
+     * @param UpdateQARequest $qaCreateRequest
+     * @param QuestionAnswer  $qa
+     *
+     * @return QuestionAnswer
+     */
+    public function update(UpdateQARequest $qaCreateRequest, QuestionAnswer $qa): QuestionAnswer
+    {
+        $em = $this->getEntityManager();
+
+        $qa
+            ->setTitle($qaCreateRequest->getTitle())
+            ->setStatus($qaCreateRequest->getStatus());
 
         try {
             $em->persist($qa);

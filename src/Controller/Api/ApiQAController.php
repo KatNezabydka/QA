@@ -4,7 +4,7 @@ namespace App\Controller\Api;
 
 use App\DTO\Request\CreateQARequest;
 use App\DTO\Request\UpdateQARequest;
-use App\DTO\Response\CreateQAResponse;
+use App\DTO\Response\QAResponse;
 use App\Entity\QuestionAnswer;
 use App\Service\QAService;
 use App\Util\JMSSerializerAwareTrait;
@@ -40,17 +40,32 @@ class ApiQAController extends AbstractController
      *
      * @param QuestionAnswer  $questionAnswer
      * @param UpdateQARequest $qaUpdateRequest
+     * @param QAService       $questionAnswerService
      *
      * @return Response
      */
     public function updateQAAction(
         QuestionAnswer $questionAnswer,
-        UpdateQARequest $qaUpdateRequest
+        UpdateQARequest $qaUpdateRequest,
+        QAService $questionAnswerService
     ): Response {
         $errors = $this->validateAndGetErrors($qaUpdateRequest);
-        dd($errors);
 
-        return $this->json($questionAnswer, Response::HTTP_OK);
+        if (!empty($errors)) {
+            $this->info('Create QA', [
+                'response' => $errors,
+            ]);
+
+            $response = (new QAResponse())
+                ->setErrorMessage($errors)
+                ->setStatusCode(Response::HTTP_BAD_REQUEST);
+
+            return $this->json($this->toArray($response), $response->getStatusCode());
+        }
+
+        $response = $questionAnswerService->update($qaUpdateRequest, $questionAnswer);
+
+        return $this->json($this->toArray($response), $response->getStatusCode());
     }
 
     /**

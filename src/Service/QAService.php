@@ -3,7 +3,8 @@
 namespace App\Service;
 
 use App\DTO\Request\CreateQARequest;
-use App\DTO\Response\CreateQAResponse;
+use App\DTO\Request\UpdateQARequest;
+use App\DTO\Response\QAResponse;
 use App\Entity\QuestionAnswer;
 use App\Repository\QuestionAnswerRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -29,14 +30,23 @@ class QAService implements QAServiceInterface
     /**
      * @param CreateQARequest $qaCreateRequest
      *
-     * @return CreateQAResponse
+     * @return QAResponse
      */
-    public function save(CreateQARequest $qaCreateRequest): CreateQAResponse
+    public function save(CreateQARequest $qaCreateRequest): QAResponse
     {
-        $qa = $this->questionAnswerRepository->addQuestion($qaCreateRequest);
+        $qa = $this->questionAnswerRepository->save($qaCreateRequest);
 
-        return (new CreateQAResponse())
+        return (new QAResponse())
             ->setQuestionId($qa->getId())
             ->setStatusCode(Response::HTTP_CREATED);
+    }
+
+    public function update(UpdateQARequest $qaCreateRequest, QuestionAnswer $questionAnswer): QAResponse
+    {
+        $qa = $this->questionAnswerRepository->update($qaCreateRequest, $questionAnswer);
+
+        return (new QAResponse())
+            ->setQuestionId($qa->getId())
+            ->setStatusCode(Response::HTTP_OK);
     }
 }

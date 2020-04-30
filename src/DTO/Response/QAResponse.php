@@ -4,7 +4,7 @@ namespace App\DTO\Response;
 
 use JMS\Serializer\Annotation as JMS;
 
-class CreateQAResponse
+class QAResponse
 {
     /**
      * @var int
@@ -41,9 +41,9 @@ class CreateQAResponse
     /**
      * @param int $questionId
      *
-     * @return CreateQAResponse
+     * @return QAResponse
      */
-    public function setQuestionId(int $questionId): CreateQAResponse
+    public function setQuestionId(int $questionId): QAResponse
     {
         $this->questionId = $questionId;
 
@@ -61,9 +61,9 @@ class CreateQAResponse
     /**
      * @param string $errorMessage
      *
-     * @return CreateQAResponse
+     * @return QAResponse
      */
-    public function setErrorMessage(string $errorMessage): CreateQAResponse
+    public function setErrorMessage(string $errorMessage): QAResponse
     {
         $this->errorMessage = $errorMessage;
 
@@ -81,9 +81,9 @@ class CreateQAResponse
     /**
      * @param int $statusCode
      *
-     * @return CreateQAResponse
+     * @return QAResponse
      */
-    public function setStatusCode(int $statusCode): CreateQAResponse
+    public function setStatusCode(int $statusCode): QAResponse
     {
         $this->statusCode = $statusCode;
 

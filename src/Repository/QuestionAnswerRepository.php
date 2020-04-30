@@ -6,6 +6,7 @@ use App\Adapter\QARequestAdapter;
 use App\DTO\Request\CreateQARequest;
 use App\DTO\Request\UpdateQARequest;
 use App\Entity\QuestionAnswer;
+use App\Entity\QuestionHistoric;
 use App\Util\JMSSerializerAwareTrait;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\ORMException;
@@ -47,18 +48,29 @@ class QuestionAnswerRepository extends ServiceEntityRepository
     }
 
     /**
-     * @param UpdateQARequest $qaCreateRequest
+     * @param UpdateQARequest $qaUpdateRequest
      * @param QuestionAnswer  $qa
+     *
+     * @throws ORMException
      *
      * @return QuestionAnswer
      */
-    public function update(UpdateQARequest $qaCreateRequest, QuestionAnswer $qa): QuestionAnswer
+    public function update(UpdateQARequest $qaUpdateRequest, QuestionAnswer $qa): QuestionAnswer
     {
         $em = $this->getEntityManager();
 
+        if ($qa->isTitleChange($qaUpdateRequest->getTitle()) ||
+            $qa->isStatusChange($qaUpdateRequest->getStatus())) {
+            $qh = (new QuestionHistoric())
+                ->setTitle($qaUpdateRequest->getTitle())
+                ->setStatus($qaUpdateRequest->getStatus());
+
+            $em->persist($qh);
+        }
+
         $qa
-            ->setTitle($qaCreateRequest->getTitle())
-            ->setStatus($qaCreateRequest->getStatus());
+            ->setTitle($qaUpdateRequest->getTitle())
+            ->setStatus($qaUpdateRequest->getStatus());
 
         try {
             $em->persist($qa);

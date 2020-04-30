@@ -4,9 +4,12 @@ namespace App\Entity;
 
 use App\Entity\Traits\DateUpdateTrait;
 use Doctrine\ORM\Mapping as ORM;
+use Elao\Enum\Enum;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\QuestionHistoricRepository")
+ * @ORM\Table(name="question_historic")
+ * @ORM\HasLifecycleCallbacks
  */
 class QuestionHistoric
 {
@@ -24,7 +27,7 @@ class QuestionHistoric
     private $title;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @ORM\Column(type="status", length=255, nullable=true)
      */
     private $status;
 
@@ -33,11 +36,19 @@ class QuestionHistoric
         return $this->id;
     }
 
+    /**
+     * @return string|null
+     */
     public function getTitle(): ?string
     {
         return $this->title;
     }
 
+    /**
+     * @param string|null $title
+     *
+     * @return $this
+     */
     public function setTitle(?string $title): self
     {
         $this->title = $title;
@@ -45,12 +56,20 @@ class QuestionHistoric
         return $this;
     }
 
-    public function getStatus(): ?string
+    /**
+     * @return Enum
+     */
+    public function getStatus(): ?Enum
     {
         return $this->status;
     }
 
-    public function setStatus(?string $status): self
+    /**
+     * @param Enum $status
+     *
+     * @return $this
+     */
+    public function setStatus(Enum $status): self
     {
         $this->status = $status;
 

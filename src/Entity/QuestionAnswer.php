@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Entity\Traits\DateCreateTrait;
 use App\Entity\Traits\DateUpdateTrait;
+use App\Enum\StatusEnum;
 use Doctrine\ORM\Mapping as ORM;
 use Elao\Enum\Enum;
 
@@ -119,7 +120,7 @@ class QuestionAnswer
      *
      * @return QuestionAnswer
      */
-    public function setStatus($status): QuestionAnswer
+    public function setStatus(Enum $status): QuestionAnswer
     {
         $this->status = $status;
 
@@ -144,5 +145,25 @@ class QuestionAnswer
         $this->answers = $answers;
 
         return $this;
+    }
+
+    /**
+     * @param string $title
+     *
+     * @return bool
+     */
+    public function isTitleChange(string $title): bool
+    {
+        return !($this->getTitle() === $title);
+    }
+
+    /**
+     * @param StatusEnum $status
+     *
+     * @return bool
+     */
+    public function isStatusChange(StatusEnum $status): bool
+    {
+        return !($this->getStatus() === $status);
     }
 }

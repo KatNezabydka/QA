@@ -49,6 +49,22 @@ class ApiQAControllerTest extends WebTestCase
         static::assertEquals(400, $client->getResponse()->getStatusCode());
     }
 
+    public function testUpdateQAAction(): void
+    {
+        $client = static::createClient();
+
+        $client->request(
+            'PUT',
+            'api/qa/5',
+            [],
+            [],
+            ['CONTENT_TYPE' => 'application/json'],
+            '{ "title": "Update title", "status": "published"}'
+        );
+
+        static::assertTrue($client->getResponse()->isSuccessful());
+    }
+
     /**
      * раскоментить когда нужно.
      */

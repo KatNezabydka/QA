@@ -52,7 +52,7 @@ class ApiQAController extends AbstractController
         $errors = $this->validateAndGetErrors($qaUpdateRequest);
 
         if (!empty($errors)) {
-            $this->info('Create QA', [
+            $this->info('Update QA', [
                 'response' => $errors,
             ]);
 
@@ -86,7 +86,7 @@ class ApiQAController extends AbstractController
                 'response' => $errors,
             ]);
 
-            $response = (new CreateQAResponse())
+            $response = (new QAResponse())
                 ->setErrorMessage($errors)
                 ->setStatusCode(Response::HTTP_BAD_REQUEST);
 

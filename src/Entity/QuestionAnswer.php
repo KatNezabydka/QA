@@ -2,11 +2,11 @@
 
 namespace App\Entity;
 
+use App\DTO\Request\RequestDTOInterface;
 use App\Entity\Traits\DateCreateTrait;
 use App\Entity\Traits\DateUpdateTrait;
-use App\Enum\StatusEnum;
 use Doctrine\ORM\Mapping as ORM;
-use Elao\Enum\Enum;
+use Elao\Enum\EnumInterface;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\QuestionAnswerRepository")
@@ -23,22 +23,22 @@ class QuestionAnswer
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      */
-    private $id;
+    private int $id;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $title;
+    private string $title;
 
     /**
      * @ORM\Column(type="boolean")
      */
-    private $promoted;
+    private bool $promoted;
 
     /**
      * @ORM\Column(type="status")
      */
-    private $status;
+    private EnumInterface $status;
 
     /**
      * @var array
@@ -58,9 +58,9 @@ class QuestionAnswer
     /**
      * @param int $id
      *
-     * @return QuestionAnswer
+     * @return self
      */
-    public function setId($id): QuestionAnswer
+    public function setId($id): self
     {
         $this->id = $id;
 
@@ -78,9 +78,9 @@ class QuestionAnswer
     /**
      * @param mixed $title
      *
-     * @return QuestionAnswer
+     * @return self
      */
-    public function setTitle($title): QuestionAnswer
+    public function setTitle($title): self
     {
         $this->title = $title;
 
@@ -98,9 +98,9 @@ class QuestionAnswer
     /**
      * @param mixed $promoted
      *
-     * @return QuestionAnswer
+     * @return self
      */
-    public function setPromoted($promoted): QuestionAnswer
+    public function setPromoted($promoted): self
     {
         $this->promoted = $promoted;
 
@@ -108,19 +108,19 @@ class QuestionAnswer
     }
 
     /**
-     * @return Enum
+     * @return EnumInterface
      */
-    public function getStatus(): Enum
+    public function getStatus(): EnumInterface
     {
         return $this->status;
     }
 
     /**
-     * @param Enum $status
+     * @param EnumInterface $status
      *
-     * @return QuestionAnswer
+     * @return self
      */
-    public function setStatus(Enum $status): QuestionAnswer
+    public function setStatus(EnumInterface $status): self
     {
         $this->status = $status;
 
@@ -138,9 +138,9 @@ class QuestionAnswer
     /**
      * @param array $answers
      *
-     * @return QuestionAnswer
+     * @return self
      */
-    public function setAnswers(array $answers): QuestionAnswer
+    public function setAnswers(array $answers): self
     {
         $this->answers = $answers;
 
@@ -148,22 +148,20 @@ class QuestionAnswer
     }
 
     /**
-     * @param string $title
+     * @param RequestDTOInterface $requestDTO
      *
-     * @return bool
+     * @return $this
      */
-    public function isTitleChange(string $title): bool
+    public function updateFromQuestionQARequest(RequestDTOInterface $requestDTO): self
     {
-        return !($this->getTitle() === $title);
-    }
+        if ($requestDTO->hasTitle()) {
+            $this->title = $requestDTO->getTitle();
+        }
 
-    /**
-     * @param StatusEnum $status
-     *
-     * @return bool
-     */
-    public function isStatusChange(StatusEnum $status): bool
-    {
-        return !($this->getStatus() === $status);
+        if ($requestDTO->hasStatus()) {
+            $this->status = $requestDTO->getStatus();
+        }
+
+        return $this;
     }
 }

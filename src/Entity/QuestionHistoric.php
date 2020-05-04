@@ -1,77 +1,110 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Entity;
 
-use App\Entity\Traits\DateUpdateTrait;
 use Doctrine\ORM\Mapping as ORM;
-use Elao\Enum\Enum;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\QuestionHistoricRepository")
  * @ORM\Table(name="question_historic")
- * @ORM\HasLifecycleCallbacks
  */
 class QuestionHistoric
 {
-    use DateUpdateTrait;
     /**
-     * @ORM\Id
-     * @ORM\GeneratedValue
+     * @ORM\Id()
+     * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
      */
-    private $id;
+    private ?int $id;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @ORM\Column(type="integer")
      */
-    private $title;
+    private ?int $questionId;
 
     /**
-     * @ORM\Column(type="status", length=255, nullable=true)
+     * @ORM\Column(type="datetime")
      */
-    private $status;
+    private ?\DateTimeInterface $changeDate;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private ?string $fieldName;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private ?string $changedFrom;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private ?string $changedTo;
 
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    /**
-     * @return string|null
-     */
-    public function getTitle(): ?string
+    public function getQuestionId(): ?int
     {
-        return $this->title;
+        return $this->questionId;
     }
 
-    /**
-     * @param string|null $title
-     *
-     * @return $this
-     */
-    public function setTitle(?string $title): self
+    public function setQuestionId(int $questionId): self
     {
-        $this->title = $title;
+        $this->questionId = $questionId;
 
         return $this;
     }
 
-    /**
-     * @return Enum
-     */
-    public function getStatus(): ?Enum
+    public function getChangeDate(): ?\DateTimeInterface
     {
-        return $this->status;
+        return $this->changeDate;
     }
 
-    /**
-     * @param Enum $status
-     *
-     * @return $this
-     */
-    public function setStatus(Enum $status): self
+    public function setChangeDate(\DateTimeInterface $changeDate): self
     {
-        $this->status = $status;
+        $this->changeDate = $changeDate;
+
+        return $this;
+    }
+
+    public function getFieldName(): ?string
+    {
+        return $this->fieldName;
+    }
+
+    public function setFieldName(string $fieldName): self
+    {
+        $this->fieldName = $fieldName;
+
+        return $this;
+    }
+
+    public function getChangedFrom(): ?string
+    {
+        return $this->changedFrom;
+    }
+
+    public function setChangedFrom(string $changedFrom): self
+    {
+        $this->changedFrom = $changedFrom;
+
+        return $this;
+    }
+
+    public function getChangedTo(): ?string
+    {
+        return $this->changedTo;
+    }
+
+    public function setChangedTo(string $changedTo): self
+    {
+        $this->changedTo = $changedTo;
 
         return $this;
     }

@@ -35,6 +35,17 @@ services:
         tags:
             - { name: kernel.event_listener, event: kernel.request }
 
+    App\EventListener\QuestionChangesListener:
+        tags:
+            - { name: 'doctrine.event_subscriber' }
+
+    App\MessageHandler\:
+        resource: '../src/MessageHandler/*'
+        public: true
+        tags: [messenger.message_handler]
+        autowire: true
+
+
 # Внедрение зависимости метод-сеттера
 #    App\Repository\QuestionAnswerRepository:
 #        calls:

@@ -17,10 +17,10 @@ interface QAServiceInterface
     public function save(CreateQARequest $qaCreateRequest): QAResponse;
 
     /**
-     * @param UpdateQARequest $qaCreateRequest
+     * @param UpdateQARequest $qaUpdateRequest
      * @param QuestionAnswer  $questionAnswer
      *
      * @return QAResponse
      */
-    public function update(UpdateQARequest $qaCreateRequest, QuestionAnswer $questionAnswer): QAResponse;
+    public function update(UpdateQARequest $qaUpdateRequest, QuestionAnswer $questionAnswer): QAResponse;
 }

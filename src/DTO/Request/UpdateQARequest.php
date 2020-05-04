@@ -45,4 +45,20 @@ class UpdateQARequest implements RequestDTOInterface
     {
         return StatusEnum::get($this->status);
     }
+
+    /**
+     * @return bool
+     */
+    public function hasTitle(): bool
+    {
+        return !empty($this->title);
+    }
+
+    /**
+     * @return bool
+     */
+    public function hasStatus(): bool
+    {
+        return !empty($this->status);
+    }
 }

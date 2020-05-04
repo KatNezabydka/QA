@@ -41,9 +41,10 @@ class QAService implements QAServiceInterface
             ->setStatusCode(Response::HTTP_CREATED);
     }
 
-    public function update(UpdateQARequest $qaCreateRequest, QuestionAnswer $questionAnswer): QAResponse
+    public function update(UpdateQARequest $qaUpdateRequest, QuestionAnswer $questionAnswer): QAResponse
     {
-        $qa = $this->questionAnswerRepository->update($qaCreateRequest, $questionAnswer);
+        $questionAnswer->updateFromQuestionQARequest($qaUpdateRequest);
+        $qa = $this->questionAnswerRepository->update($questionAnswer);
 
         return (new QAResponse())
             ->setQuestionId($qa->getId())

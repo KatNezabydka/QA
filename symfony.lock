@@ -99,9 +99,6 @@
             "config/packages/elao_enum.yaml"
         ]
     },
-    "emag-tech-labs/rabbitmq-bundle": {
-        "version": "2.1.1"
-    },
     "friendsofphp/php-cs-fixer": {
         "version": "2.2",
         "recipe": {
@@ -176,6 +173,9 @@
             "config/packages/prod/jms_serializer.yaml"
         ]
     },
+    "laminas/laminas-zendframework-bridge": {
+        "version": "1.0.3"
+    },
     "monolog/monolog": {
         "version": "2.0.2"
     },
@@ -189,10 +189,7 @@
         "version": "2.2.3"
     },
     "php": {
-        "version": "7.2"
-    },
-    "php-amqplib/php-amqplib": {
-        "version": "v2.11.2"
+        "version": "7.4"
     },
     "php-cs-fixer/diff": {
         "version": "v1.3.0"
@@ -205,9 +202,6 @@
     },
     "phpdocumentor/type-resolver": {
         "version": "1.1.0"
-    },
-    "phpseclib/phpseclib": {
-        "version": "2.0.27"
     },
     "phpstan/extension-installer": {
         "version": "1.0.4"
@@ -626,6 +620,9 @@
     },
     "twig/twig": {
         "version": "v3.0.3"
+    },
+    "webimpress/safe-writer": {
+        "version": "2.0.1"
     },
     "webmozart/assert": {
         "version": "1.7.0"

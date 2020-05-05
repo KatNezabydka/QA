@@ -13,7 +13,7 @@ trait ValidatorAwareTrait
     /**
      * @var ValidatorInterface
      */
-    protected $validator;
+    protected ValidatorInterface $validator;
 
     /**
      * @required

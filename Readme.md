@@ -1,4 +1,34 @@
-## Task - Backend - Coding Test :
+API: Question & Answer
+========================
+
+Api for working with a Question & Answer document
+
+Requirements
+------------
+
+  * PHP 7.2.5 or higher;
+  * composer 1.6.3 or higher;
+  * docker 18.09 or higher;
+  * docker-compose 1.17 or higher;
+
+Version usage
+-----
+  * PHP 7.4.4;
+  * Symfony 5.0;
+  * Postgres 12.2;
+
+Usage
+-----
+
+```bash
+$ docker-compose up
+```
+In docker container execute:
+
+```bash
+php bin/console doctrine:migrations:migrate
+```
+## Task - Backend:
 
 Use PHP7 & Symfony 4.4 or 5 and MariaDB or PostgreSQL database.
 Unit Tests are mandatory. 

@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Entity\QuestionHistoric;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\QueryBuilder;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -19,32 +20,12 @@ class QuestionHistoricRepository extends ServiceEntityRepository
         parent::__construct($registry, QuestionHistoric::class);
     }
 
-    // /**
-    //  * @return QuestionHistoric[] Returns an array of QuestionHistoric objects
-    //  */
-    /*
-    public function findByExampleField($value)
+    public function historyQueryBuilder(): QueryBuilder
     {
-        return $this->createQueryBuilder('q')
-            ->andWhere('q.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('q.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-        ;
-    }
-    */
+        $qb = $this->createQueryBuilder('qh');
 
-    /*
-    public function findOneBySomeField($value): ?QuestionHistoric
-    {
-        return $this->createQueryBuilder('q')
-            ->andWhere('q.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
+        return $qb
+            ->setMaxResults(20)
+            ->orderBy('qh.changeDate', 'DESC');
     }
-    */
 }

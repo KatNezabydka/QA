@@ -11,6 +11,10 @@ services:
         autowire: true      # Automatically injects dependencies in your services.
         autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
 
+    _instanceof:
+        App\Strategy\Types\ExporterInterface:
+            tags: ['exporter_type']
+
     # makes classes in src/ available to be used as services
     # this creates a service per class whose id is the fully-qualified class name
     App\:
@@ -45,6 +49,9 @@ services:
         tags: [messenger.message_handler]
         autowire: true
 
+    App\Strategy\ExporterStrategy:
+        arguments:
+            - !tagged_iterator exporter_type
 
 # Внедрение зависимости метод-сеттера
 #    App\Repository\QuestionAnswerRepository:

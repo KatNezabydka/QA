@@ -9,7 +9,7 @@ trait LoggerAwareTrait
     /**
      * @var LoggerInterface
      */
-    protected $logger;
+    protected LoggerInterface $logger;
 
     /**
      * @required

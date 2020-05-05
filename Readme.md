@@ -6,8 +6,6 @@ Api for working with a Question & Answer document
 Requirements
 ------------
 
-  * PHP 7.2.5 or higher;
-  * composer 1.6.3 or higher;
   * docker 18.09 or higher;
   * docker-compose 1.17 or higher;
 
@@ -20,13 +18,16 @@ Version usage
 Usage
 -----
 
-```bash
-$ docker-compose up
-```
-In docker container execute:
+run `bash up.sh`
 
+# Run tests
 ```bash
-php bin/console doctrine:migrations:migrate
+docker-compose exec php bin/console doctrine:fixtures:load --no-interaction
+docker-compose exec php ./bin/phpunit
+```
+# Run export to csv
+```bash
+docker-compose exec php bin/console app:export:question-history
 ```
 ## Task - Backend:
 

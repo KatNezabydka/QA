@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-docker run --volume $PWD:/app --volume ~/.composer/:/tmp/ composer install -a --no-dev
+docker run --volume $PWD:/app --volume ~/.composer/:/tmp/ composer install -a
 
 docker-compose up -d
 

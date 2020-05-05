@@ -21,5 +21,4 @@ class QuestionHistoryHandler
         $metaData = $this->entityManager->getClassMetadata(QuestionHistoric::class);
         $this->entityManager->getUnitOfWork()->computeChangeSet($metaData, $questionHistory);
     }
-
 }

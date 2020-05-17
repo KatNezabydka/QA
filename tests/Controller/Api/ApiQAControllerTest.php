@@ -10,19 +10,45 @@ use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
  */
 class ApiQAControllerTest extends WebTestCase
 {
+    private const JSON_QUESTION = <<<'JSON'
+{
+ "title": "How to",
+ "promoted": true,
+ "created": "1990-12-31T23:59:60Z",
+ "updated": "1990-12-31T23:59:60Z",
+ "status": "draft",
+ "channel": "faq",
+ "content": "Answer by question"
+}
+JSON;
+
+    private int $id;
+
     /**
      * @dataProvider provideUrls
      *
      * @param $url
+     *
+     * @throws \JsonException
      */
     public function testGetQAAction($url): void
     {
         $client = static::createClient();
 
-        $client->request('GET', $url);
+        $client->request(
+            'POST',
+            '/qa',
+            [],
+            [],
+            ['CONTENT_TYPE' => 'application/json'],
+            self::JSON_QUESTION
+        );
+        $this->assertEquals(201, $client->getResponse()->getStatusCode());
 
-        static::assertTrue($client->getResponse()->isSuccessful());
-        //or
+        $this->id = json_decode($client->getResponse()->getContent(), true, 512, JSON_THROW_ON_ERROR)['id'];
+
+        $client->request('GET', $url, ['id' => $this->id]);
+
         static::assertEquals(200, $client->getResponse()->getStatusCode());
     }
 
@@ -30,10 +56,8 @@ class ApiQAControllerTest extends WebTestCase
     {
         $client = static::createClient();
 
-        $client->request('GET', '/api/qa/t1');
+        $client->request('GET', '/api/qa/negative_1');
 
-        static::assertTrue($client->getResponse()->isNotFound());
-        //or
         static::assertEquals(404, $client->getResponse()->getStatusCode());
     }
 
@@ -49,26 +73,48 @@ class ApiQAControllerTest extends WebTestCase
         static::assertEquals(400, $client->getResponse()->getStatusCode());
     }
 
-    public function testUpdateQAAction(): void
+    /**
+     * @dataProvider provideUrls
+     *
+     * @param $url
+     * @throws \JsonException
+     */
+    public function testUpdateQAAction($url): void
     {
         $client = static::createClient();
 
         $client->request(
-            'PUT',
-            'api/qa/5',
+            'POST',
+            '/qa',
             [],
             [],
             ['CONTENT_TYPE' => 'application/json'],
-            '{ "title": "Update title", "status": "published"}'
+            self::JSON_QUESTION
+        );
+        $this->assertEquals(201, $client->getResponse()->getStatusCode());
+
+        $this->id = json_decode($client->getResponse()->getContent(), true, 512, JSON_THROW_ON_ERROR)['id'];
+
+        $client->request(
+            'PUT',
+            $url,
+            ['id' => $this->id],
+            [],
+            ['CONTENT_TYPE' => 'application/json'],
+            '{ "title": "Changed", "status": "published"}'
         );
 
-        static::assertTrue($client->getResponse()->isSuccessful());
+        $this->assertEquals(200, $client->getResponse()->getStatusCode());
+
+        $client->request('GET', $url, ['id' => $this->id]);
+
+        $this->assertEquals(200, $client->getResponse()->getStatusCode());
     }
 
     /**
      * раскоментить когда нужно.
      */
-    public function ptestSaveQAAction(): void
+    public function testSaveQAAction(): void
     {
         $client = static::createClient();
 
@@ -78,10 +124,10 @@ class ApiQAControllerTest extends WebTestCase
             [],
             [],
             ['CONTENT_TYPE' => 'application/json'],
-            '{ "title": "New title","promoted": true,"status": "draft","channel": "faq","content": "Answer by question"}'
+            self::JSON_QUESTION
         );
 
-        static::assertTrue($client->getResponse()->isSuccessful());
+        static::assertEquals(201, $client->getResponse()->getStatusCode());
     }
 
     /**
@@ -90,7 +136,7 @@ class ApiQAControllerTest extends WebTestCase
     public function provideUrls(): array
     {
         return [
-            ['/api/qa/5'],
+            ["/api/qa/{$this->id}"],
         ];
     }
 }

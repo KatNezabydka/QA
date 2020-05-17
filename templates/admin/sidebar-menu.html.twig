@@ -1,0 +1,172 @@
+<!-- Sidebar Menu -->
+{#{% if data is  defined %}#}
+    {#{% set route = data.baseObject.route %}#}
+{#{% endif %}#}
+{% if route is not defined %}
+    {% set route = '' %}
+{% endif %}
+
+<ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+
+    {% if is_granted(["ROLE_CITRUS_ADMIN"]) %}
+        <li class="nav-item has-treeview  {% if route in
+            [
+                'citrus_admin_orderfarvater_index',
+                'citrus_admin_orderfarvater_edit'
+            ] %} menu-open {% endif %}">
+
+            <a href="#" class="nav-link {% if route in
+                [
+                    'citrus_admin_orderfarvater_index',
+                    'citrus_admin_orderfarvater_edit'
+                ] %} active {% endif %}">
+                <i class="fa fa-cogs" aria-hidden="true"></i>
+                <p>
+                    Заказы Farvater
+                    <i class="right fa fa-angle-left"></i>
+                </p>
+            </a>
+
+            <ul class="nav nav-treeview">
+                {#{% if have_access(['citrus_admin_orderfarvater_index']) %}#}
+                    <li class="nav-item">
+                        <a class="nav-link {% if route in
+                            [
+                                'citrus_admin_orderfarvater_index',
+                                'citrus_admin_orderfarvater_edit'
+                            ] %} active {% endif %}"
+                           href="{{ url('citrus_admin_orderfarvater_index') }}">
+                            <i class="fa fa-circle-o nav-icon"></i>
+                            <p>Заказы Farvater</p>
+                        </a>
+                    </li>
+                {#{% endif %}#}
+            </ul>
+        </li>
+    {% endif %}
+
+    {% if is_granted(["ROLE_CITRUS_ADMIN"]) %}
+        <li class="nav-item has-treeview  {% if route in
+            [
+                'citrus_admin_acl_user_list',
+                'citrus_admin_acl_user_edit',
+                'citrus_admin_acl_user_add',
+                'citrus_admin_acl_role_list',
+                'citrus_admin_acl_role_add',
+                'citrus_admin_acl_role_edit'
+            ] %} menu-open {% endif %}">
+
+            <a href="#" class="nav-link {% if route in
+                [
+                    'citrus_admin_acl_user_list',
+                    'citrus_admin_acl_user_edit',
+                    'citrus_admin_acl_user_add',
+                    'citrus_admin_acl_role_list',
+                    'citrus_admin_acl_role_add',
+                    'citrus_admin_acl_role_edit'
+                ] %} active {% endif %}">
+                <i class="fa fa-cogs" aria-hidden="true"></i>
+                <p>
+                    ACL управление
+                    <i class="right fa fa-angle-left"></i>
+                </p>
+            </a>
+
+            <ul class="nav nav-treeview">
+                {#{% if have_access(['citrus_admin_acl_user_list']) %}#}
+                    {#<li class="nav-item">#}
+                        {#<a class="nav-link {% if route in#}
+                            {#['citrus_admin_acl_user_list',#}
+                                {#'citrus_admin_acl_user_edit',#}
+                                {#'citrus_admin_acl_user_add'#}
+                            {#] %} active {% endif %}"#}
+                           {#href="{{ url('citrus_admin_acl_user_list', {}, 1) }}">#}
+                            {#<i class="fa fa-circle-o nav-icon"></i>#}
+                            {#<p>Пользователи</p>#}
+                        {#</a>#}
+                    {#</li>#}
+                {#{% endif %}#}
+{#                {% if have_access(['citrus_admin_acl_role_list']) %}#}
+{#                    <li class="nav-item">#}
+{#                        <a class="nav-link {% if route in#}
+{#                            [#}
+{#                                'citrus_admin_acl_role_list',#}
+{#                                'citrus_admin_acl_role_add',#}
+{#                                'citrus_admin_acl_role_edit'#}
+{#                            ] %} active {% endif %}"#}
+{#                           href="{{ url('citrus_admin_acl_role_list', {}, 1) }}">#}
+{#                            <i class="fa fa-circle-o nav-icon"></i>#}
+{#                            <p>Роли</p>#}
+{#                        </a>#}
+{#                    </li>#}
+{#                {% endif %}#}
+            </ul>
+        </li>
+    {% endif %}
+
+    {% if is_granted(["ROLE_CITRUS_ADMIN", "ROLE_CITRUS_PRICE_TAG"]) %}
+        <li class="nav-item has-treeview  {% if route in
+            [
+                'citrus_admin_pricetag_index',
+                'citrus_admin_pricetag_print',
+            ] %} menu-open {% endif %}">
+
+            <a href="#" class="nav-link {% if route in
+                [
+                    'citrus_admin_pricetag_index',
+                    'citrus_admin_pricetag_print',
+                ] %} active {% endif %}">
+                <i class="fa fa-cogs" aria-hidden="true"></i>
+                <p>
+                    Распечатка ценников
+                    <i class="right fa fa-angle-left"></i>
+                </p>
+            </a>
+
+            <ul class="nav nav-treeview">
+                {#{% if have_access(['citrus_admin_pricetag_index']) %}#}
+                    <li class="nav-item">
+                        <a class="nav-link {% if route in
+                            [
+                                'citrus_admin_pricetag_index',
+                                'citrus_admin_pricetag_print',
+                            ] %} active {% endif %}"
+                           href="{{ url('citrus_admin_pricetag_index', {}) }}">
+                            <i class="fa fa-circle-o nav-icon"></i>
+                            <p>Распечатка ценников</p>
+                        </a>
+                    </li>
+                {#{% endif %}#}
+            </ul>
+        </li>
+    {% endif %}
+
+    {% if is_granted(["ROLE_CITRUS_ADMIN", "ROLE_CITRUS_COMMENT_MODERATOR"]) %}
+        <li class="nav-item has-treeview  {% if route in ['comments.index'] %} menu-open {% endif %}">
+            <a href="#" class="nav-link {% if route in ['comments.index'] %} active {% endif %}">
+                <i class="fa fa-cogs" aria-hidden="true"></i>
+                <p>
+                    Комментарии
+                    <i class="right fa fa-angle-left"></i>
+                </p>
+            </a>
+            <ul class="nav nav-treeview">
+                <li class="nav-item">
+                    <a class="nav-link {% if route in ['comments.index'] %} active {% endif %}"
+                       href="{{ url('citrus_admin_comments_list', {}) }}">
+                        <i class="fa fa-circle-o nav-icon"></i>
+                        <p>Модерирование</p>
+                    </a>
+                </li>
+            </ul>
+        </li>
+    {% endif %}
+
+    {#<li class="nav-header">123</li>#}
+
+
+    {# -------- Эта li всегда должна быть последней -------- #}
+    <li class="logout-li">
+        <a href="{{ url('app_logout') }}"><b>Выход</b></a>
+    </li>
+</ul>

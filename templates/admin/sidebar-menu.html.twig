@@ -8,42 +8,6 @@
 
 <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
 
-    {% if is_granted(["ROLE_CITRUS_ADMIN"]) %}
-        <li class="nav-item has-treeview  {% if route in
-            [
-                'citrus_admin_orderfarvater_index',
-                'citrus_admin_orderfarvater_edit'
-            ] %} menu-open {% endif %}">
-
-            <a href="#" class="nav-link {% if route in
-                [
-                    'citrus_admin_orderfarvater_index',
-                    'citrus_admin_orderfarvater_edit'
-                ] %} active {% endif %}">
-                <i class="fa fa-cogs" aria-hidden="true"></i>
-                <p>
-                    Заказы Farvater
-                    <i class="right fa fa-angle-left"></i>
-                </p>
-            </a>
-
-            <ul class="nav nav-treeview">
-                {#{% if have_access(['citrus_admin_orderfarvater_index']) %}#}
-                    <li class="nav-item">
-                        <a class="nav-link {% if route in
-                            [
-                                'citrus_admin_orderfarvater_index',
-                                'citrus_admin_orderfarvater_edit'
-                            ] %} active {% endif %}"
-                           href="{{ url('citrus_admin_orderfarvater_index') }}">
-                            <i class="fa fa-circle-o nav-icon"></i>
-                            <p>Заказы Farvater</p>
-                        </a>
-                    </li>
-                {#{% endif %}#}
-            </ul>
-        </li>
-    {% endif %}
 
     {% if is_granted(["ROLE_CITRUS_ADMIN"]) %}
         <li class="nav-item has-treeview  {% if route in

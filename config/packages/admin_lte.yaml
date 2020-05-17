@@ -6,18 +6,28 @@
 # For tabs in the control_sidebar (right screen) add the 'control_sidebar' config key:
 # https://github.com/kevinpapst/AdminLTEBundle/blob/master/Resources/docs/control_sidebar.md
 
-admin_lte:
-    options:
-        skin: skin-blue
-        fixed_layout: false
-        boxed_layout: false
-        collapsed_sidebar: false
-        mini_sidebar: false
+#admin_lte:
+#    options:
+#        skin: skin-blue
+#        fixed_layout: false
+#        boxed_layout: false
+#        collapsed_sidebar: false
+#        mini_sidebar: false
+#
+#    knp_menu:
+#        enable: false
+#
+#    routes:
+#        adminlte_welcome: qa_index
+#        adminlte_login: qa_login
+#        adminlte_profile: profile
+#
+#    control_sidebar:
+#        home:
+#            icon: fas fa-home
+#            template: control-sidebar/home.html.twig
+#        settings:
+#            icon: fas fa-cogs
+#            controller: 'App\Controller\IndexController::controlSidebarSettings'
 
-    knp_menu:
-        enable: false
 
-    routes:
-        adminlte_welcome: qa_index
-        adminlte_login: qa_login
-        adminlte_profile: profile
